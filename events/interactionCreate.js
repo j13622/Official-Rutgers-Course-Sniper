@@ -32,6 +32,33 @@ module.exports = {
 			interaction.modal = modal;
 		}
 
+		if (interaction.commandName === 'stop') {
+			const modal = new ModalBuilder()
+				.setCustomId('stopModal')
+				.setTitle('Stop Sniping Form');
+
+			const fullCourseTags = new TextInputBuilder()
+				.setCustomId('courseTags')
+				.setLabel('List the courses to stop monitoring here:')
+				.setPlaceholder('01:198:213 01:563:103')
+				.setStyle(TextInputStyle.Paragraph)
+				.setRequired(false);
+
+			const courseSections = new TextInputBuilder()
+				.setCustomId('courseSections')
+				.setLabel('List the sections to stop monitoring here:')
+				.setPlaceholder('08648 07359')
+				.setStyle(TextInputStyle.Paragraph)
+				.setRequired(false);
+
+			const firstActionRow = new ActionRowBuilder().addComponents(fullCourseTags);
+			const secondActionRow = new ActionRowBuilder().addComponents(courseSections);
+
+			modal.addComponents(firstActionRow, secondActionRow);
+
+			interaction.modal = modal;
+		}
+
 		const command = interaction.client.commands.get(interaction.commandName);
 
 		if (!command) {

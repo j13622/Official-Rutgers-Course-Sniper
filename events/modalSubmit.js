@@ -4,6 +4,13 @@ module.exports = {
 	name: Events.InteractionCreate,
 	async execute(interaction) {
 		if (!interaction.isModalSubmit()) return;
+		let add = true;
+		let str1 = 'You will get a DM when the following courses become available: ';
+		if (interaction.customId == 'stopModal') {
+			add = false;
+			str1 = 'You have stopped sniping the following courses: ';
+		}
+		console.log(interaction);
 		const courseTags = interaction.fields.getTextInputValue('courseTags');
 		const courseSections = interaction.fields.getTextInputValue('courseSections');
 		const courseSectionsArray = courseSections.split(' ');
@@ -19,10 +26,12 @@ module.exports = {
 				for (const val of indices) {
 					if (interaction.client.sectionUser.get(val) != null) {
 						const userSet = interaction.client.sectionUser.get(val);
-						if (!userSet.has(interaction.user.id)) {
+						if (!userSet.has(interaction.user.id) && add) {
 							userSet.add(interaction.user.id);
+						} else if (userSet.has(interaction.user.id) && !add) {
+							userSet.delete(interaction.user.id);
 						}
-					} else {
+					} else if (add) {
 						const userSet = new Set();
 						userSet.add(interaction.user.id);
 						interaction.client.sectionUser.set(val, userSet);
@@ -37,10 +46,12 @@ module.exports = {
 				passSet.add(i);
 				if (interaction.client.sectionUser.get(i) != null) {
 					const userSet = interaction.client.sectionUser.get(i);
-					if (!userSet.has(interaction.user.id)) {
+					if (!userSet.has(interaction.user.id) && add) {
 						userSet.add(interaction.user.id);
+					} else if (userSet.has(interaction.user.id) && !add) {
+						userSet.delete(interaction.user.id);
 					}
-				} else {
+				} else if (add) {
 					const userSet = new Set();
 					userSet.add(interaction.user.id);
 					interaction.client.sectionUser.set(i, userSet);
@@ -53,7 +64,8 @@ module.exports = {
 		failSet.delete('');
 		passSet.delete('');
 		if (passSet.size != 0) {
-			replyMessage = 'Received! You will get a DM when the following courses become available: ';
+			// eslint-disable-next-line quotes
+			replyMessage = `Received! ${str1}`;
 			for (const val of passSet) {
 				replyMessage = replyMessage + val + ' ';
 			}

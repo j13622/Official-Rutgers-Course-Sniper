@@ -3,13 +3,6 @@ const path = require('node:path');
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 const { token } = require('./config.json');
 
-const access = fs.createWriteStream('./outlog');
-process.stdout.write = process.stderr.write = access.write.bind(access);
-
-process.on('uncaughtException', function(err) {
-	console.error((err && err.stack) ? err.stack : err);
-});
-
 const client = new Client({ intents: [GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages, GatewayIntentBits.Guilds, GatewayIntentBits.DirectMessages] });
 
 client.commands = new Collection();
