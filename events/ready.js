@@ -26,8 +26,8 @@ module.exports = {
 	once: true,
 	execute(client) {
 		console.log(`Ready! Logged in as ${client.user.tag}`);
-		console.log('Logging for google cloud purposes');
 		setInterval(async () => {
+			console.log('Logging for google cloud purposes');
 			const date = new Date();
 			const year = date.getFullYear();
 			const month = date.getMonth();
