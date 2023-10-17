@@ -50,6 +50,8 @@ module.exports = {
 			}
 		}
 		let replyMessage = '';
+		failSet.delete('');
+		passSet.delete('');
 		if (passSet.size != 0) {
 			replyMessage = 'Received! You will get a DM when the following courses become available: ';
 			for (const val of passSet) {
@@ -59,7 +61,7 @@ module.exports = {
 		}
 		if (courseTagsArray[0] == '' && courseSectionsArray[0] == '') {
 			replyMessage = 'It seems you did not submit anything. Please fill out one or both of the queries.';
-		} else if (failSet.size != 0 && (failSet.size != 1 && failSet[0] == undefined)) {
+		} else if (failSet.size != 0) {
 			replyMessage = replyMessage + 'We could not find the following courses: ';
 			for (const val of failSet) {
 				replyMessage = replyMessage + val + ' ';

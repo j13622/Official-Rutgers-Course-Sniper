@@ -1,5 +1,6 @@
 const { Events, Collection } = require('discord.js');
 const fs = require('fs');
+const { link1, link2, link3 } = require('../config.json');
 
 const exEmbed = {
 	color: 0xee337e,
@@ -38,7 +39,8 @@ module.exports = {
 				term = 7;
 			}
 			try {
-				const regJson = await fetch(`https://sis.rutgers.edu/soc/api/courses.json?year=${year}&term=${term}&campus=NB`);
+				const link = link1 + year + link2 + term + link3;
+				const regJson = await fetch(link);
 				const courseData = await regJson.json();
 				const courseOpenStatus = new Collection();
 				// map for tag -> set of sections should only change when the term changes, or when client starts
@@ -143,4 +145,3 @@ module.exports = {
 		}, 1000);
 	},
 };
-
