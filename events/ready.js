@@ -1,4 +1,5 @@
 const { Events, Collection } = require('discord.js');
+const fs = require('fs');
 
 const exEmbed = {
 	color: 0xee337e,
@@ -8,6 +9,16 @@ const exEmbed = {
 	},
 	timestamp: new Date().toISOString(),
 };
+
+let count = 0;
+
+function replacer(key, value) {
+	if (value instanceof Set) {
+		const arr = Array.from(value);
+		return arr;
+	}
+	return value;
+}
 
 module.exports = {
 	name: Events.ClientReady,
@@ -117,6 +128,17 @@ module.exports = {
 				client.term = term;
 			} catch {
 				console.log('fetch error');
+			}
+			count++;
+			if (count == 5) {
+				count = 0;
+				const fromEntries = Object.fromEntries(client.sectionUser);
+				const sectionJson = JSON.stringify(fromEntries, replacer);
+				fs.writeFile('sectionUsers.json', sectionJson, function(err) {
+					if (err) {
+						console.log(err);
+					}
+				});
 			}
 		}, 1000);
 	},
