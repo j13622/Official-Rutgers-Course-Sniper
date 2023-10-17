@@ -132,7 +132,7 @@ module.exports = {
 				console.log('fetch error');
 			}
 			count++;
-			if (count == 5) {
+			if (count == 3600) {
 				count = 0;
 				const fromEntries = Object.fromEntries(client.sectionUser);
 				const sectionJson = JSON.stringify(fromEntries, replacer);
