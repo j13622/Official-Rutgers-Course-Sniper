@@ -3,7 +3,8 @@ Click here to join the server: https://discord.gg/NJeXVSk66E
 This is a Rutgers Course Sniper bot you can use to track when a course becomes available. To start, use the /snipe command in the #main-snipe-channel.
 You will be greeted with the following modal (form):
 
-![image](https://github.com/j13622/Official-Rutgers-Course-Sniper/assets/18039706/5e7adba6-71a7-4fb7-b6bb-87c4990af6e8)
+[![image](https://github.com/j13622/Official-Rutgers-Course-Sniper/assets/18039706/5e7adba6-71a7-4fb7-b6bb-87c4990af6e8)
+](https://imgur.com/a/ji1Wncu)
 
 To monitor every section of a course, input its course tag into the first box. To monitor just or multiple sections of a course, input the section IDs in the second box.
 After submitting, you will be greeted with a message like this:
