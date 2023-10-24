@@ -5,7 +5,7 @@ You will be greeted with the following modal (form):
 
 ![image](https://i.imgur.com/bSbG6ak.png)
 
-To monitor every section of a course, input its course tag into the first box. To monitor just or multiple sections of a course, input the section IDs in the second box.
+To monitor every section of a course, input its course tag into the first box. To monitor just 1 or multiple sections of a course, input the section IDs in the second box.
 After submitting, you will be greeted with a message like this:
 
 ![image](https://i.imgur.com/7jnrCke.png)
